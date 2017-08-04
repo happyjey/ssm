@@ -9,13 +9,20 @@
   </description>
   <display-name>SSM 最佳实践</display-name>
 
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.servlet.DispatcherServlet</listener-class>
+  </listener>
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring/spring-*.xml</param-value>
+      <param-value>classpath:spring/spring-web.xml</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
