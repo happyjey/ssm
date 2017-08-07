@@ -14,7 +14,7 @@
     <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
   <listener>
-    <listener-class>org.springframework.web.servlet.DispatcherServlet</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
@@ -72,5 +72,26 @@
     <filter-name>characterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <!-- 配置Shiro过滤器：
+    使用门面设计模式，spring的DelegatingFilterProxy提供统一的过滤器接口
+    使用shiroFilter参数来载入自定义的过滤器，默认自动到IOC容器中载入ID为shiroFilter的BEAN
+  -->
+  <filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetFilterLifecycle</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>/user/login</welcome-file>
+  </welcome-file-list>
 
 </web-app>

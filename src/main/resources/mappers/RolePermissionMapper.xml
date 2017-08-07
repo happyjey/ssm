@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.happyjey.dao.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.happyjey.entity.RolePermission" >
+    <constructor >
+      <arg column="role_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="permission" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.happyjey.entity.RolePermission" >
+    insert into ssm_role_permission (role_name, permission)
+    values (#{roleName,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.happyjey.entity.RolePermission" >
+    insert into ssm_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

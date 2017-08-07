@@ -44,4 +44,10 @@
         (2)允许使用"/"做整体映射
      -->
     <mvc:default-servlet-handler/>
+
+    <!-- view模板 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
 </beans>
