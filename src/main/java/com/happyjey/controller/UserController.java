@@ -7,7 +7,6 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,6 +49,11 @@ public class UserController {
 
     @RequestMapping(value = "success",method = RequestMethod.GET)
     public String success(){
+        Subject subject = SecurityUtils.getSubject();
+        boolean isPermitted = subject.isPermitted("user:*");
+        System.out.println("isPermitted:user:*="+isPermitted);
+        boolean isPermitted2 = subject.isPermitted("user:edit");
+        System.out.println("isPermitted:user:edit="+isPermitted2);
         System.out.println("success");
         return "success";
     }

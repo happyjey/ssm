@@ -2,6 +2,10 @@ package com.happyjey.dao;
 
 import com.happyjey.entity.Admin;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer adminId);
 
@@ -15,4 +19,6 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    Set<String> getPermissions(String name);
 }

@@ -6,6 +6,9 @@ import com.happyjey.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by Administrator on 2017/8/4.
  */
@@ -23,5 +26,10 @@ public class AdminServiceImpl implements IAdminService {
     @Override
     public Admin getUserByName(String name) {
         return adminMapper.selectByName(name);
+    }
+
+    @Override
+    public Set<String> getPermissions(String name) {
+        return adminMapper.getPermissions(name);
     }
 }

@@ -25,7 +25,12 @@
       from ssm_admin
       where admin_name = #{adminName,jdbcType=VARCHAR}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <select id="getPermissions" resultType="java.lang.String">
+    SELECT `permission` FROM ssm_admin_role
+    RIGHT JOIN ssm_role_permission ON ssm_admin_role.role_name = ssm_role_permission.role_name
+    WHERE admin_name = #{name}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ssm_admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </delete>
