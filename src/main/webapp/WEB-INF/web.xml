@@ -9,6 +9,10 @@
   </description>
   <display-name>SSM 最佳实践</display-name>
 
+  <welcome-file-list>
+    <welcome-file>/user/login</welcome-file>
+  </welcome-file-list>
+
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext.xml</param-value>
@@ -16,6 +20,7 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -89,9 +94,27 @@
     <filter-name>shiroFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  <welcome-file-list>
-    <welcome-file>/user/login</welcome-file>
-  </welcome-file-list>
+
+  <!--sitemesh-->
+  <filter>
+    <filter-name>sitemeshFilter</filter-name>
+    <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sitemeshFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--FreemarkerFilter-->
+  <filter>
+    <filter-name>freemarkerFilter</filter-name>
+    <filter-class>com.happyjey.common.FreemarkerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>freemarkerFilter</filter-name>
+    <url-pattern>*.ftl</url-pattern>
+    <!--<dispatcher>REQUEST</dispatcher>-->
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
 
 </web-app>

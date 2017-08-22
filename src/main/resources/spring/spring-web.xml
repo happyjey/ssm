@@ -45,9 +45,24 @@
      -->
     <mvc:default-servlet-handler/>
 
-    <!-- view模板 -->
+
+    <!--freemarker的view模板：第一优先级-->
+    <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"></property>
+        <property name="prefix" value=""></property>
+        <property name="suffix" value=".ftl"></property>
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <!--<property name="requestContextAttribute" value="rc" />-->
+        <!--<property name="exposeRequestAttributes" value="true" />-->
+        <!--<property name="exposeSpringMacroHelpers" value="true" />-->
+        <!--<property name="exposeSessionAttributes" value="true" />-->
+        <property name="order" value="0"></property>
+    </bean>
+    <!--jsp的view模板：第二优先级-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>
+        <property name="order" value="1"></property>
     </bean>
+
 </beans>

@@ -1,0 +1,10 @@
+<sitemesh>
+    <mapping>
+        <!--path映射地址URL-->
+        <path>/*</path>
+        <!--以templateLoaderPath配置的路径为基础-->
+        <decorator>/common/layout.ftl</decorator>
+    </mapping>
+    <!--登录不需要装饰-->
+    <mapping path="/user/login" exclue="true"/>
+</sitemesh>
