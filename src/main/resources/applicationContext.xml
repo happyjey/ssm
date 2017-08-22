@@ -175,10 +175,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /*.ico = anon
-                /*.css = anon
-                /*.jpg = anon
-                /*.png = anon
-                /*.js = anon
+                /static/** = anon
                 /user/login = anon
                 /user/dologin = anon
                 /test/freemarker2 = anon
