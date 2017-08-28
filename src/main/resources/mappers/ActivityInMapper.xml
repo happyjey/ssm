@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.happyjey.dao.ActivityInMapper" >
+  <resultMap id="BaseResultMap" type="com.happyjey.entity.ActivityIn" >
+    <constructor >
+      <arg column="in_uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="in_aid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="in_status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="in_atime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.happyjey.entity.ActivityIn" >
+    insert into ssm_activity_in (in_uid, in_aid, in_status, 
+      in_atime)
+    values (#{inUid,jdbcType=INTEGER}, #{inAid,jdbcType=INTEGER}, #{inStatus,jdbcType=TINYINT}, 
+      #{inAtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.happyjey.entity.ActivityIn" >
+    insert into ssm_activity_in
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="inUid != null" >
+        in_uid,
+      </if>
+      <if test="inAid != null" >
+        in_aid,
+      </if>
+      <if test="inStatus != null" >
+        in_status,
+      </if>
+      <if test="inAtime != null" >
+        in_atime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="inUid != null" >
+        #{inUid,jdbcType=INTEGER},
+      </if>
+      <if test="inAid != null" >
+        #{inAid,jdbcType=INTEGER},
+      </if>
+      <if test="inStatus != null" >
+        #{inStatus,jdbcType=TINYINT},
+      </if>
+      <if test="inAtime != null" >
+        #{inAtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

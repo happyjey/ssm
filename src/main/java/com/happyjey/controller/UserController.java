@@ -21,8 +21,14 @@ public class UserController {
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login(){
-        return "login";
+        Subject subject = SecurityUtils.getSubject();
+        // 是否登录
+        if (!subject.isAuthenticated()){
+            return "login";
+        }
+        return "redirect:/index/index";
     }
+
     @RequestMapping(value = "dologin",method = RequestMethod.POST)
     public String dologin(String username, String pwd){
         System.out.println("username:"+username+"|pwd:"+pwd);
@@ -35,32 +41,18 @@ public class UserController {
                 subject.login(upToken);
             }catch (AuthenticationException e){
                 logger.error("认证失败");
-                return "redirect:/user/success";
+                return "redirect:/user/login";
             }
         }
-        return "redirect:/user/success";
+        return "redirect:/index/index";
     }
 
-    @RequestMapping(value = "test",method = RequestMethod.GET)
-    public String test(){
-        System.out.println("test");
-        return "test";
-    }
-
-    @RequestMapping(value = "success",method = RequestMethod.GET)
-    public String success(){
+    @RequestMapping("logout")
+    public String logout(){
         Subject subject = SecurityUtils.getSubject();
-        boolean isPermitted = subject.isPermitted("user:*");
-        System.out.println("isPermitted:user:*="+isPermitted);
-        boolean isPermitted2 = subject.isPermitted("user:edit");
-        System.out.println("isPermitted:user:edit="+isPermitted2);
-        System.out.println("success");
-        return "success";
+        subject.logout();
+        return "redirect:/user/login";
     }
 
-    @RequestMapping(value = "unauthorized",method = RequestMethod.GET)
-    public String unauthorized(){
-        System.out.println("unauthorized");
-        return "unauthorized";
-    }
+
 }

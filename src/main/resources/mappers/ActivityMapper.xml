@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.happyjey.dao.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.happyjey.entity.Activity" >
+    <constructor >
+      <idArg column="act_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="act_uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="act_pic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="act_stime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="act_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="act_limit_num" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="act_fee" jdbcType="DECIMAL" javaType="java.lang.Integer" />
+      <arg column="act_lat" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="act_lon" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="act_status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="act_atime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="act_utime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.happyjey.entity.Activity" >
+    <constructor >
+      <idArg column="act_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="act_uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="act_pic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="act_stime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="act_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="act_limit_num" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="act_fee" jdbcType="DECIMAL" javaType="java.lang.Integer" />
+      <arg column="act_lat" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="act_lon" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="act_status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="act_atime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="act_utime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="act_desc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    act_id, act_uid, act_pic, act_stime, act_address, act_limit_num, act_fee, act_lat, 
+    act_lon, act_status, act_atime, act_utime
+  </sql>
+  <sql id="Blob_Column_List" >
+    act_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ssm_activity
+    where act_id = #{actId,jdbcType=INTEGER}
+  </select>
+  <select id="selectBySearch" resultMap="ResultMapWithBLOBs" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    ,
+    <include refid="Blob_Column_List"></include>
+    FROM ssm_activity
+    <where>
+      <if test="actStime != null">
+        AND act_stime > #{actStime}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ssm_activity
+    where act_id = #{actId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.happyjey.entity.Activity" >
+    insert into ssm_activity (act_id, act_uid, act_pic, 
+      act_stime, act_address, act_limit_num, 
+      act_fee, act_lat, act_lon, 
+      act_status, act_atime, act_utime, 
+      act_desc)
+    values (#{actId,jdbcType=INTEGER}, #{actUid,jdbcType=INTEGER}, #{actPic,jdbcType=VARCHAR}, 
+      #{actStime,jdbcType=TIMESTAMP}, #{actAddress,jdbcType=VARCHAR}, #{actLimitNum,jdbcType=SMALLINT}, 
+      #{actFee,jdbcType=DECIMAL}, #{actLat,jdbcType=DOUBLE}, #{actLon,jdbcType=DOUBLE}, 
+      #{actStatus,jdbcType=TINYINT}, #{actAtime,jdbcType=TIMESTAMP}, #{actUtime,jdbcType=TIMESTAMP}, 
+      #{actDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.happyjey.entity.Activity" >
+    insert into ssm_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        act_id,
+      </if>
+      <if test="actUid != null" >
+        act_uid,
+      </if>
+      <if test="actPic != null" >
+        act_pic,
+      </if>
+      <if test="actStime != null" >
+        act_stime,
+      </if>
+      <if test="actAddress != null" >
+        act_address,
+      </if>
+      <if test="actLimitNum != null" >
+        act_limit_num,
+      </if>
+      <if test="actFee != null" >
+        act_fee,
+      </if>
+      <if test="actLat != null" >
+        act_lat,
+      </if>
+      <if test="actLon != null" >
+        act_lon,
+      </if>
+      <if test="actStatus != null" >
+        act_status,
+      </if>
+      <if test="actAtime != null" >
+        act_atime,
+      </if>
+      <if test="actUtime != null" >
+        act_utime,
+      </if>
+      <if test="actDesc != null" >
+        act_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        #{actId,jdbcType=INTEGER},
+      </if>
+      <if test="actUid != null" >
+        #{actUid,jdbcType=INTEGER},
+      </if>
+      <if test="actPic != null" >
+        #{actPic,jdbcType=VARCHAR},
+      </if>
+      <if test="actStime != null" >
+        #{actStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actAddress != null" >
+        #{actAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="actLimitNum != null" >
+        #{actLimitNum,jdbcType=SMALLINT},
+      </if>
+      <if test="actFee != null" >
+        #{actFee,jdbcType=DECIMAL},
+      </if>
+      <if test="actLat != null" >
+        #{actLat,jdbcType=DOUBLE},
+      </if>
+      <if test="actLon != null" >
+        #{actLon,jdbcType=DOUBLE},
+      </if>
+      <if test="actStatus != null" >
+        #{actStatus,jdbcType=TINYINT},
+      </if>
+      <if test="actAtime != null" >
+        #{actAtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actUtime != null" >
+        #{actUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actDesc != null" >
+        #{actDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.happyjey.entity.Activity" >
+    update ssm_activity
+    <set >
+      <if test="actUid != null" >
+        act_uid = #{actUid,jdbcType=INTEGER},
+      </if>
+      <if test="actPic != null" >
+        act_pic = #{actPic,jdbcType=VARCHAR},
+      </if>
+      <if test="actStime != null" >
+        act_stime = #{actStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actAddress != null" >
+        act_address = #{actAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="actLimitNum != null" >
+        act_limit_num = #{actLimitNum,jdbcType=SMALLINT},
+      </if>
+      <if test="actFee != null" >
+        act_fee = #{actFee,jdbcType=DECIMAL},
+      </if>
+      <if test="actLat != null" >
+        act_lat = #{actLat,jdbcType=DOUBLE},
+      </if>
+      <if test="actLon != null" >
+        act_lon = #{actLon,jdbcType=DOUBLE},
+      </if>
+      <if test="actStatus != null" >
+        act_status = #{actStatus,jdbcType=TINYINT},
+      </if>
+      <if test="actAtime != null" >
+        act_atime = #{actAtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actUtime != null" >
+        act_utime = #{actUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actDesc != null" >
+        act_desc = #{actDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where act_id = #{actId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.happyjey.entity.Activity" >
+    update ssm_activity
+    set act_uid = #{actUid,jdbcType=INTEGER},
+      act_pic = #{actPic,jdbcType=VARCHAR},
+      act_stime = #{actStime,jdbcType=TIMESTAMP},
+      act_address = #{actAddress,jdbcType=VARCHAR},
+      act_limit_num = #{actLimitNum,jdbcType=SMALLINT},
+      act_fee = #{actFee,jdbcType=DECIMAL},
+      act_lat = #{actLat,jdbcType=DOUBLE},
+      act_lon = #{actLon,jdbcType=DOUBLE},
+      act_status = #{actStatus,jdbcType=TINYINT},
+      act_atime = #{actAtime,jdbcType=TIMESTAMP},
+      act_utime = #{actUtime,jdbcType=TIMESTAMP},
+      act_desc = #{actDesc,jdbcType=LONGVARCHAR}
+    where act_id = #{actId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.happyjey.entity.Activity" >
+    update ssm_activity
+    set act_uid = #{actUid,jdbcType=INTEGER},
+      act_pic = #{actPic,jdbcType=VARCHAR},
+      act_stime = #{actStime,jdbcType=TIMESTAMP},
+      act_address = #{actAddress,jdbcType=VARCHAR},
+      act_limit_num = #{actLimitNum,jdbcType=SMALLINT},
+      act_fee = #{actFee,jdbcType=DECIMAL},
+      act_lat = #{actLat,jdbcType=DOUBLE},
+      act_lon = #{actLon,jdbcType=DOUBLE},
+      act_status = #{actStatus,jdbcType=TINYINT},
+      act_atime = #{actAtime,jdbcType=TIMESTAMP},
+      act_utime = #{actUtime,jdbcType=TIMESTAMP}
+    where act_id = #{actId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -3,11 +3,9 @@
     <sitemesh:write property='head'/>
 </head>
 <body>
-<#include "/common/_header.ftl" />
-<#include "/common/_menu.ftl" />
-<div class="pd-20">xxxx
-    <sitemesh:write property='body'/>
-</div>
+
+<sitemesh:write property="body"/>
+
 <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
